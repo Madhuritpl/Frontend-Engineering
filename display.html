@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head></head>
+<body onload="load_data()"> 
+<a style="font-size:30px;color: red; align: right" href='net.html'>Go Back</a>
+<center> 
+ <div id="info-container">
+
+	<p>Name: <span id="name"></span></p>
+        <p>Capital: <span id="capital"></span></p>
+        <p>Dialing Code: <span id="dialing-code"></span></p>
+        <p>Popsulation: <span id="population"></span></p>
+        <p>Currencies: <span id="currencies"></span></p>
+        <p>Region: <span id="region"></span></p>
+        <p>Subregion: <span id="subregion"></span></p> 
+      </div>   
+    </div>
+</center>
+<script >
+function load_data(){
+var countryData = JSON.parse(localStorage.getItem("country_name"))
+document.getElementById("name").innerHTML = countryData.name;
+  document.getElementById("capital").innerHTML = countryData.capital;
+  document.getElementById("dialing-code").innerHTML = `+${countryData.callingCodes[0]}`;
+  document.getElementById("population").innerHTML = countryData.population.toLocaleString("en-US");
+  document.getElementById("currencies").innerHTML = countryData.currencies.filter(c => c.name).map(c => `${c.name} (${c.code})`).join(", ");
+  document.getElementById("region").innerHTML = countryData.region;
+  document.getElementById("subregion").innerHTML = countryData.subregion;
+}
+</script> 
+</body>
+</html>
